@@ -1,0 +1,17 @@
+# Striver-A-to-Z-Sheet
+In this i will be uploading solutions of striver A to Z sheet
+
+class Solution {
+  public:
+    int largest(vector<int> &arr) {
+        
+        int largest=arr[0];
+        for(int i=0;i<arr.size();i++)
+        {
+            if(arr[i]>largest)
+                largest=arr[i];
+        }
+        return largest;
+        
+    }
+};

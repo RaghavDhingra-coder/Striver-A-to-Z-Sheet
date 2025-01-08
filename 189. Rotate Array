@@ -1,0 +1,34 @@
+# Methode -1 (Using O(n) extra space)
+
+class Solution {
+public:
+    void rotate(vector<int>& nums, int k) {
+        int size=nums.size();
+        int i,j;
+        vector<int>b(size);
+        k=k%size;
+
+        for(i=0,j=size-k;i<k;i++,j++)
+        {
+            b[i]=nums[j];
+        }
+        for(i,j=0;j<size-k;i++,j++)
+        {
+            b[i]=nums[j];
+        }
+        nums=b;
+    }
+};
+
+# Methode 2 (using O(1) Extra Space)
+
+class Solution {
+public:
+    void rotate(vector<int>& nums, int k) {
+        k=k%nums.size();
+       reverse(nums.begin(),nums.end());
+       reverse(nums.begin(),nums.begin()+k);
+       reverse(nums.begin()+k,nums.end());
+    }
+};
+# reverse funtion is already present in c++ stl

@@ -1,0 +1,147 @@
+# METHODE - 1
+
+  vector<int> findUnion(vector<int> &a, vector<int> &b) {
+       
+       vector<int>ans;
+       int i,j,k;
+       for(i=0,j=0,k=0;i<a.size()&&j<b.size();)
+       {
+           if(a[i]<b[j])
+           {
+               if(k!=0)
+               {
+                   if(a[i]!=ans[k-1])
+                   {
+                      ans.push_back(a[i]);
+                       i++;
+                       k++;
+                   }
+                   else
+                   {
+                       i++;
+                   }
+               }
+               else
+               {
+                  ans.push_back(a[i]);
+                   i++;
+                   k++;
+               }
+           }
+           else
+           {
+               if(k!=0)
+               {
+                   if(b[j]!=ans[k-1])
+                   {
+                       ans.push_back(b[j]);
+                       j++;
+                       k++;
+                   }
+                   else
+                   {
+                       j++;
+                   }
+               }
+               else
+               {
+                   ans.push_back(b[j]);
+                   j++;
+                   k++;
+               }
+           }
+       }
+       while(i<a.size())
+       {
+            if(k!=0)
+               {
+                   if(a[i]!=ans[k-1])
+                   {
+                      ans.push_back(a[i]);
+                       i++;
+                       k++;
+                   }
+                   else
+                   {
+                       i++;
+                   }
+               }
+               else
+               {
+                  ans.push_back(a[i]);
+                   i++;
+                   k++;
+               }
+       }
+       while(j<b.size())
+       {
+           
+               if(k!=0)
+               {
+                   if(b[j]!=ans[k-1])
+                   {
+                       ans.push_back(b[j]);
+                       j++;
+                       k++;
+                   }
+                   else
+                   {
+                       j++;
+                   }
+               }
+               else
+               {
+                   ans.push_back(b[j]);
+                   j++;
+                   k++;
+               }
+       }
+       return ans;
+    }
+
+# METHODE 2
+
+ int check(vector<int>&c,int data)
+    {
+        return binary_search(c.begin(),c.end(),data);
+    }
+    vector<int> findUnion(vector<int> &a, vector<int> &b) {
+      int i,j;
+      vector<int>c;
+      for(i=0,j=0;i<a.size()&&j<b.size();)
+      {
+          if(check(c,a[i]))
+            i++;
+          else if(check(c,b[j]))
+            j++;
+        else if(a[i]<b[j])
+        {
+            c.push_back(a[i]);
+            i++;
+        }
+        else
+        {
+            c.push_back(b[j]);
+            j++;
+        }
+      }
+      while(i<a.size())
+      {
+          if(!check(c,a[i]))
+          {
+              c.push_back(a[i]);
+          }
+          i++;
+          
+      }
+      while(j<b.size())
+      {
+          if(!check(c,b[j]))
+          {
+             c.push_back(b[j]);
+          }
+          j++;
+      }
+      
+      return c;
+    }

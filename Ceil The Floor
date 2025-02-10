@@ -1,0 +1,36 @@
+class Solution {
+  public:
+    vector<int> getFloorAndCeil(int x, vector<int> &arr) {
+        int i;
+        int floor=-1;
+        int ceil=-1;
+        int flag=0;
+        for(int i=0;i<arr.size();i++)
+        {
+            // floor value
+            if(arr[i]>floor&&arr[i]<=x)
+            {
+                floor=arr[i];
+            }
+            // ceil value
+            if(arr[i]>=x)
+            {
+                if(flag==0)
+                    {ceil=arr[i];
+                        flag=1;
+                    }
+                else
+                {
+                    if(arr[i]<ceil)
+                        ceil=arr[i];
+                }
+                
+            }
+            
+        }
+        vector<int>ans;
+        ans.push_back(floor);
+        ans.push_back(ceil);
+        return ans;
+    }
+};

@@ -1,0 +1,45 @@
+class Solution {
+public:
+    int max_element(vector<int>&piles)
+    {
+        int max=piles[0];
+        for(int i=1;i<piles.size();i++)
+        {
+            if(piles[i]>max)
+            {
+                max=piles[i];
+            }
+        }
+        return max;
+    }
+    long long req_hours(vector<int>&piles,int k)
+    {
+        long long hours=0;
+        for(int i=0;i<piles.size();i++)
+        {
+            hours+=ceil((double)piles[i]/(double)k);
+        }
+        return hours;
+    }
+    int minEatingSpeed(vector<int>& piles, int h) {
+        
+        int low=1,high=max_element(piles),mid,ans=INT_MAX;
+        long long hours;
+        while(low<=high)
+        {
+            mid=(low+high)/2;
+            hours=req_hours(piles,mid);
+            if(hours<=h)
+            {
+                ans=mid;
+                high=mid-1;
+            }
+            else
+            {
+                low=mid+1;
+            }
+        }
+        return ans;
+
+    }
+};

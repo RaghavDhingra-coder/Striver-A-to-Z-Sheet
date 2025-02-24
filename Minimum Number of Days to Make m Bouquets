@@ -1,0 +1,60 @@
+class Solution {
+public:
+    int max_element(vector<int>nums)
+    {
+        int max=nums[0];
+        for(int i=0;i<nums.size();i++)
+        {
+            if(nums[i]>max)
+                max=nums[i];
+        }
+        return max;
+    }
+    int adj(vector<int>nums,int d,int k)
+    {
+        for(int i=0;i<nums.size();i++)
+        {
+            nums[i]=nums[i]-d;
+        }
+        int count=0,t=0;
+        for(int i=0;i<nums.size();i++)
+        {
+          if(t==k)
+          {
+            count++;
+            t=0;
+          }
+          if(nums[i]<=0)
+          {
+            t++;
+          }
+          else
+          {
+            t=0;
+          }
+        }
+        if(t==k)
+            count++;
+         return count;
+    }
+    int minDays(vector<int>& bloomDay, int m, int k) {
+        
+        int low=1,high=max_element(bloomDay),mid,c,ans=-1;
+        while(low<=high)
+        {
+            mid=(low+high)/2;
+            c=adj(bloomDay,mid,k);
+            if(c>=m)
+            {
+                ans=mid;
+                high=mid-1;
+            }
+            else
+            {
+                low=mid+1;
+            }
+        }
+        return ans;
+
+    }
+};

@@ -1,0 +1,65 @@
+// Approach 1 : 
+
+TC - O(2N)
+SC -- O(1)
+class Solution {
+  public:
+    // Function to reverse a doubly linked list
+    DLLNode* reverseDLL(DLLNode* head) {
+    
+        DLLNode*last=head;
+        DLLNode*head2=head;
+        int v;
+        int count=1;
+        while(last->next)
+        {
+            last=last->next;
+            count++;
+        }
+       count=count/2;
+       int i=1;
+            while(i<=count)
+            {
+                v=head2->data;
+                head2->data=last->data;
+                last->data=v;
+                
+                head2=head2->next;
+                last=last->prev;
+                
+                i++;
+            }
+        return head;
+    }
+};
+
+
+Approach 2 -- (Slightly Better as it solves the problem in single go)
+
+TC - O(N)
+SC -- O(1)
+
+class Solution {
+  public:
+    // Function to reverse a doubly linked list
+    DLLNode* reverseDLL(DLLNode* head) {
+        if(head->next==nullptr)
+        {
+            return head;
+        }
+        DLLNode*prev;
+        DLLNode*curr;
+        
+        curr=head;
+        while(curr)
+        {
+            prev=curr->prev;
+            curr->prev=curr->next;
+            curr->next=prev;
+            
+            curr=curr->prev;
+        }
+        head=prev->prev;
+        return head;
+    }
+};

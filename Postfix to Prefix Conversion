@@ -1,0 +1,31 @@
+class Solution {
+  public:
+    string postToPre(string s) {
+        
+        int n = s.size();
+        
+        stack<string>stk;
+        
+        string t1,t2,conc;
+        
+        for(int i=0;i<n;i++)
+        {
+            if((s[i]>='a'&&s[i]<='z')||(s[i]>='A'&&s[i]<='Z') || (s[i]>='0'&&s[i]<='9'))
+            {
+                stk.push(string(1,s[i]));
+            }
+            else
+            {
+                t1=stk.top();
+                stk.pop();
+                t2=stk.top();
+                stk.pop();
+                
+                conc = s[i]+t2+t1;
+                
+                stk.push(conc);
+            }
+        }
+        return stk.top();
+    }
+};

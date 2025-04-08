@@ -1,0 +1,28 @@
+class Solution {
+  public:
+    string preToInfix(string s) {
+        
+        stack<string>stk;
+        int n = s.size();
+        string t1;
+        string t2;
+        string conc;
+        for (int i= n-1 ; i>=0 ; i--)
+        {
+            if ( (s[i]>='a' && s[i]<='z') || (s[i]>='A' && s[i]<='Z') || (s[i]>='0' && s[i]<='9'))
+            {
+                stk.push(string(1,s[i]));
+            }
+            else
+            {
+                t1 = stk.top();
+                stk.pop();
+                t2 = stk.top();
+                stk.pop();
+                conc = '('+t1+s[i]+t2+')';
+                stk.push(conc);
+            }
+        }
+        return stk.top();
+    }
+};

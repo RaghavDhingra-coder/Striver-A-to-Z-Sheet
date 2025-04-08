@@ -1,0 +1,60 @@
+class Solution {
+  public:
+  
+  int priority(char op)
+  {
+      if(op == '+' || op == '-')
+        return 1;
+      if(op == '*' || op == '/' || op == '%')
+        return 2;
+      if(op == '^')
+        return 3;
+      else
+         return -1;
+  }
+  
+    string infixToPostfix(string& s) {
+        
+        int i=0;
+        stack<char>stk;
+        string ans="";
+        int n=s.size();
+        
+        while(i < n)
+        {
+            if((s[i]>='a' && s[i] <='z') || (s[i]>='A' && s[i]<='Z') || (s[i]>='0' && s[i] <='9'))
+            {
+                ans = ans + s[i];
+            }
+            else if( s[i] == '(' )
+            {
+                stk.push(s[i]);
+            }
+            else if (s[i] == ')')
+            {
+                while(stk.top()!='(')
+                {
+                    ans = ans + stk.top();
+                    stk.pop();
+                }
+                stk.pop();
+            }
+            else
+            {
+                while(!stk.empty() && priority(s[i]) <= priority(stk.top()))
+                {
+                    ans = ans + stk.top();
+                    stk.pop();
+                }
+                stk.push(s[i]);
+            }
+            i++;
+        }
+        while(stk.size())
+        {
+            ans = ans + stk.top();
+            stk.pop();
+        }
+        return ans;
+    }
+};
